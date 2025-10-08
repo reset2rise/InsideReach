@@ -42,7 +42,7 @@ export default function MarriageEnrichment() {
                 Marriage Enrichment on Fire
               </h2>
             </div>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mt-6">
               From the start, your relationship deserves the very best support that God can give it.
               That's why our services are designed to help you build a solid foundation, develop strong
               and consistent habits and grow together, all through the wonderful gift of play.

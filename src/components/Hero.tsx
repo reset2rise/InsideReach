@@ -5,16 +5,16 @@ export default function Hero() {
 
       <div className="relative z-10 container mx-auto px-6 py-10 md:py-12">
         <div className="max-w-5xl mx-auto text-center">
-          <div className="flex justify-center mb-0">
+          <div className="flex justify-center mb-3">
             <img
               src="/Inside Reach Ministries logo.png"
               alt="Inside Reach Ministries Logo"
-              className="w-full max-w-lg h-auto"
+              className="w-full max-w-md h-auto"
               style={{imageRendering: '-webkit-optimize-contrast', WebkitFontSmoothing: 'antialiased'}}
             />
           </div>
 
-          <p className="text-2xl md:text-3xl font-bold text-blue-700 mb-10 leading-relaxed -mt-2">
+          <p className="text-2xl md:text-3xl font-bold text-blue-700 mb-10 leading-relaxed -mt-4">
             "Changing the world...One Person, One Family, One Business, One Community at a time."
           </p>
 
