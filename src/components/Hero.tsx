@@ -3,7 +3,7 @@ export default function Hero() {
     <div className="relative bg-gradient-to-br from-blue-100 via-cyan-50 to-teal-50 overflow-hidden">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iIzEwYjk4MSIgc3Ryb2tlLXdpZHRoPSIuNSIgb3BhY2l0eT0iLjA1Ii8+PC9nPjwvc3ZnPg==')] opacity-40"></div>
 
-      <div className="relative z-10 container mx-auto px-6 py-10 md:py-12 pb-20 md:pb-24">
+      <div className="relative z-10 container mx-auto px-6 py-24 md:py-28 pb-20 md:pb-24">
         <div className="max-w-5xl mx-auto text-center">
           <div className="flex justify-center mb-0">
             <img

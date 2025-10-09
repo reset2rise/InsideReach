@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
@@ -8,10 +9,56 @@ import { Success } from './pages/Success'
 import { LogOut, User, ShoppingBag, Home } from 'lucide-react'
 
 function App() {
+import AdminDashboard from './components/admin/AdminDashboard';
+import ShopPage from './components/shop/ShopPage';
+import CheckoutPage from './components/shop/CheckoutPage';
+import CartDrawer from './components/shop/CartDrawer';
+import { ShoppingCart, LogIn } from 'lucide-react';
+import { useCart } from './contexts/CartContext';
   const { user, loading, signOut } = useAuth()
+type Page = 'home' | 'shop' | 'checkout' | 'admin';
+
+
+  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [cartOpen, setCartOpen] = useState(false);
+  const { itemCount } = useCart();
+
+  if (currentPage === 'admin') {
+    return <AdminDashboard />;
+  }
+
+  if (currentPage === 'checkout') {
+    return <CheckoutPage onBack={() => setCurrentPage('shop')} />;
+  }
+
+  if (currentPage === 'shop') {
+    return (
+      <>
+        <ShopPage />
+        <CartDrawer
+          isOpen={cartOpen}
+          onClose={() => setCartOpen(false)}
+          onCheckout={() => {
+            setCartOpen(false);
+            setCurrentPage('checkout');
+          }}
+        />
+        <Navigation
+          onNavigate={setCurrentPage}
+          onCartClick={() => setCartOpen(true)}
+          cartCount={itemCount}
+        />
+      </>
+    );
+  }
 
   if (loading) {
     return (
+      <Navigation
+        onNavigate={setCurrentPage}
+        onCartClick={() => setCartOpen(true)}
+        cartCount={itemCount}
+      />
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
       </div>
@@ -22,10 +69,69 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50">
         {/* Navigation */}
+      <CartDrawer
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+        onCheckout={() => {
+          setCartOpen(false);
+          setCurrentPage('checkout');
+        }}
+      />
         <nav className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center space-x-8">
+function Navigation({
+  onNavigate,
+  onCartClick,
+  cartCount,
+}: {
+  onNavigate: (page: Page) => void;
+  onCartClick: () => void;
+  cartCount: number;
+}) {
+  return (
+    <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <button
+            onClick={() => onNavigate('home')}
+            className="text-xl font-bold text-gray-900 hover:text-orange-600 transition"
+          >
+            Inside Reach Ministries
+          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => onNavigate('shop')}
+              className="text-gray-700 hover:text-orange-600 font-medium transition"
+            >
+              Shop
+            </button>
+            <button
+              onClick={onCartClick}
+              className="relative p-2 text-gray-700 hover:text-orange-600 transition"
+            >
+              <ShoppingCart className="w-6 h-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => onNavigate('admin')}
+              className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
+            >
+              <LogIn className="w-4 h-4" />
+              Admin
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
                 <Link to="/" className="flex items-center space-x-2">
                   <img 
                     src="/Inside Reach Ministries logo.png" 
