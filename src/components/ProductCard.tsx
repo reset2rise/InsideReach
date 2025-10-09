@@ -61,7 +61,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         
         {product.description && (
-          <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+          <p className="text-gray-600 mb-4 line-clamp-3">
             {product.description}
           </p>
         )}
