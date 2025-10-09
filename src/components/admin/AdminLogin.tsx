@@ -7,7 +7,8 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const { signIn, signUp } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,9 +16,13 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      await signIn(email, password);
+      if (isSignUp) {
+        await signUp(email, password);
+      } else {
+        await signIn(email, password);
+      }
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+      setError(err.message || `Failed to ${isSignUp ? 'sign up' : 'sign in'}`);
     } finally {
       setLoading(false);
     }
@@ -30,7 +35,7 @@ export default function AdminLogin() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-600 rounded-full mb-4">
             <LogIn className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Admin Login</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{isSignUp ? 'Create Admin Account' : 'Admin Login'}</h1>
           <p className="text-gray-600 mt-2">Inside Reach Ministries</p>
         </div>
 
@@ -76,9 +81,21 @@ export default function AdminLogin() {
             disabled={loading}
             className="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? (isSignUp ? 'Creating Account...' : 'Signing in...') : (isSignUp ? 'Create Account' : 'Sign In')}
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setError('');
+            }}
+            className="text-orange-600 hover:text-orange-700 font-medium"
+          >
+            {isSignUp ? 'Already have an account? Sign In' : 'Need to create an account? Sign Up'}
+          </button>
+        </div>
       </div>
     </div>
   );
