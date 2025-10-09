@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Plus, Edit, Trash2, Eye, EyeOff } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, EyeOff, RefreshCw } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -21,6 +21,8 @@ export default function ProductManager() {
   const [loading, setLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState('');
 
   useEffect(() => {
     loadProducts();
@@ -39,6 +41,41 @@ export default function ProductManager() {
       console.error('Error loading products:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const syncStripeProducts = async () => {
+    setSyncing(true);
+    setSyncMessage('');
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        throw new Error('Not authenticated');
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sync-stripe-products`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${session.access_token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSyncMessage(`Successfully synced ${result.synced.products} products and ${result.synced.services} services from Stripe!`);
+        await loadProducts();
+      } else {
+        throw new Error(result.error || 'Failed to sync products');
+      }
+    } catch (error: any) {
+      setSyncMessage(`Error: ${error.message}`);
+    } finally {
+      setSyncing(false);
     }
   };
 
@@ -121,14 +158,30 @@ export default function ProductManager() {
           <h1 className="text-3xl font-bold text-gray-900">Products</h1>
           <p className="text-gray-600 mt-2">Manage your product catalog</p>
         </div>
-        <button
-          onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
-        >
-          <Plus className="w-5 h-5" />
-          New Product
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={syncStripeProducts}
+            disabled={syncing}
+            className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
+          >
+            <RefreshCw className={`w-5 h-5 ${syncing ? 'animate-spin' : ''}`} />
+            {syncing ? 'Syncing...' : 'Sync from Stripe'}
+          </button>
+          <button
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+          >
+            <Plus className="w-5 h-5" />
+            New Product
+          </button>
+        </div>
       </div>
+
+      {syncMessage && (
+        <div className={`p-4 rounded-lg ${syncMessage.includes('Error') ? 'bg-red-50 text-red-800' : 'bg-green-50 text-green-800'}`}>
+          {syncMessage}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.length === 0 ? (
