@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Heart, Users, Target, Star, ArrowRight, ShoppingBag } from 'lucide-react';
 
 export const Home: React.FC = () => {
@@ -23,11 +24,15 @@ export const Home: React.FC = () => {
             >
               <ShoppingBag className="w-5 h-5 mr-2" />
               Explore Products
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center"
+            >
+              <ShoppingBag className="w-5 h-5 mr-2" />
+              Explore Products
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
             <button className="border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors">
               Learn More
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -88,6 +93,10 @@ export const Home: React.FC = () => {
           <p className="text-xl text-indigo-100 mb-8">
             Join thousands of others who have discovered their purpose and strengthened their relationships.
           </p>
+          <Link 
+            to="/products"
+            className="bg-white text-indigo-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center"
+          >
           <Link 
             to="/products"
             className="bg-white text-indigo-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center"
