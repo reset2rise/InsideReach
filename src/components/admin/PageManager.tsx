@@ -98,7 +98,7 @@ export default function PageManager() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -125,7 +125,7 @@ export default function PageManager() {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+          className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
         >
           <Plus className="w-5 h-5" />
           New Page
@@ -197,7 +197,7 @@ export default function PageManager() {
                           setEditingPage(page);
                           setShowForm(true);
                         }}
-                        className="text-orange-600 hover:text-orange-900"
+                        className="text-green-600 hover:text-green-900"
                       >
                         <Edit className="w-5 h-5" />
                       </button>
@@ -261,7 +261,7 @@ function PageForm({
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             placeholder="About Our Ministry"
           />
         </div>
@@ -277,7 +277,7 @@ function PageForm({
               value={formData.slug}
               onChange={(e) => setFormData({ ...formData, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
               required
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="about-our-ministry"
             />
           </div>
@@ -291,7 +291,7 @@ function PageForm({
             value={formData.meta_description}
             onChange={(e) => setFormData({ ...formData, meta_description: e.target.value })}
             rows={2}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             placeholder="Brief description for search engines"
           />
         </div>
@@ -305,7 +305,7 @@ function PageForm({
             onChange={(e) => setFormData({ ...formData, content: e.target.value })}
             rows={15}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent font-mono text-sm"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent font-mono text-sm"
             placeholder="Enter HTML content or plain text"
           />
         </div>
@@ -316,7 +316,7 @@ function PageForm({
             id="is_published"
             checked={formData.is_published}
             onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
-            className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
           />
           <label htmlFor="is_published" className="ml-2 block text-sm text-gray-700">
             Publish this page
@@ -326,7 +326,7 @@ function PageForm({
         <div className="flex gap-4">
           <button
             type="submit"
-            className="flex-1 bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+            className="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
           >
             Save Page
           </button>

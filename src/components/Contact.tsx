@@ -110,7 +110,7 @@ export default function Contact() {
                       name="message"
                       rows={5}
                       required
-                      className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-orange-400 transition-colors duration-200 resize-none"
+                      className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:outline-none focus:border-green-400 transition-colors duration-200 resize-none"
                       placeholder="How can we help you?"
                     ></textarea>
                   </div>

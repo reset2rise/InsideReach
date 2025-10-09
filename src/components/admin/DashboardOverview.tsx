@@ -52,7 +52,7 @@ export default function DashboardOverview() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default function DashboardOverview() {
       title: 'Total Orders',
       value: stats.totalOrders,
       icon: ClipboardList,
-      color: 'bg-orange-500',
+      color: 'bg-green-500',
     },
     {
       title: 'Total Revenue',

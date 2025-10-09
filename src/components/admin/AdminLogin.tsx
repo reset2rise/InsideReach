@@ -29,10 +29,10 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-600 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-4">
             <LogIn className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900">{isSignUp ? 'Create Admin Account' : 'Admin Login'}</h1>
@@ -56,7 +56,7 @@ export default function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
               placeholder="admin@insidereach.org"
             />
           </div>
@@ -71,7 +71,7 @@ export default function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
               placeholder="••••••••"
             />
           </div>
@@ -79,7 +79,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (isSignUp ? 'Creating Account...' : 'Signing in...') : (isSignUp ? 'Create Account' : 'Sign In')}
           </button>
@@ -91,7 +91,7 @@ export default function AdminLogin() {
               setIsSignUp(!isSignUp);
               setError('');
             }}
-            className="text-orange-600 hover:text-orange-700 font-medium"
+            className="text-green-600 hover:text-green-700 font-medium"
           >
             {isSignUp ? 'Already have an account? Sign In' : 'Need to create an account? Sign Up'}
           </button>

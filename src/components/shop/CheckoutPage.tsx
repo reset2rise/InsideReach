@@ -111,7 +111,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-16 px-4">
       <div className="max-w-4xl mx-auto">
         <button
           onClick={onBack}
@@ -143,7 +143,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="John Doe"
                   />
                 </div>
@@ -157,7 +157,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -170,7 +170,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="(555) 123-4567"
                   />
                 </div>
@@ -178,7 +178,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-orange-600 text-white py-4 rounded-lg font-semibold hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>
@@ -212,7 +212,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                 <div className="pt-4 border-t border-gray-300">
                   <div className="flex justify-between items-center">
                     <span className="text-xl font-bold text-gray-900">Total</span>
-                    <span className="text-2xl font-bold text-orange-600">
+                    <span className="text-2xl font-bold text-green-600">
                       ${total.toFixed(2)}
                     </span>
                   </div>

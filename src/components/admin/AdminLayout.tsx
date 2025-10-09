@@ -83,7 +83,7 @@ export default function AdminLayout({ children, activeTab, onTabChange, onBackTo
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
                   activeTab === item.id
-                    ? 'bg-orange-50 text-orange-600'
+                    ? 'bg-green-50 text-green-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >

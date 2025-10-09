@@ -83,7 +83,7 @@ export default function ContentManager() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -98,7 +98,7 @@ export default function ContentManager() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition disabled:opacity-50"
+          className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50"
         >
           {saving ? <Loader className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
           {saving ? 'Saving...' : 'Save Changes'}
@@ -127,7 +127,7 @@ export default function ContentManager() {
               value={content[section.key] || ''}
               onChange={(e) => setContent({ ...content, [section.key]: e.target.value })}
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
               placeholder={`Enter ${section.label.toLowerCase()}`}
             />
           </div>

@@ -132,7 +132,7 @@ export default function ServiceManager() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -168,7 +168,7 @@ export default function ServiceManager() {
           </button>
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+            className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
           >
             <Plus className="w-5 h-5" />
             New Service
@@ -212,7 +212,7 @@ export default function ServiceManager() {
                 </div>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">{service.description}</p>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-orange-600">
+                  <span className="text-2xl font-bold text-green-600">
                     ${Number(service.price).toFixed(2)}
                   </span>
                   {service.duration && (
@@ -232,7 +232,7 @@ export default function ServiceManager() {
                       setEditingService(service);
                       setShowForm(true);
                     }}
-                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition text-sm"
+                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition text-sm"
                   >
                     <Edit className="w-4 h-4" />
                     Edit
@@ -298,7 +298,7 @@ function ServiceForm({
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             placeholder="Marriage Counseling"
           />
         </div>
@@ -312,7 +312,7 @@ function ServiceForm({
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             rows={4}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             placeholder="Detailed service description"
           />
         </div>
@@ -329,7 +329,7 @@ function ServiceForm({
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="150.00"
             />
           </div>
@@ -342,7 +342,7 @@ function ServiceForm({
               type="text"
               value={formData.duration}
               onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="1 hour, 6 weeks, etc."
             />
           </div>
@@ -356,7 +356,7 @@ function ServiceForm({
             type="url"
             value={formData.image_url}
             onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             placeholder="https://example.com/image.jpg"
           />
         </div>
@@ -370,7 +370,7 @@ function ServiceForm({
               type="text"
               value={formData.stripe_price_id}
               onChange={(e) => setFormData({ ...formData, stripe_price_id: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="price_xxxxxxxxxxxxx"
             />
             <p className="mt-1 text-xs text-gray-500">Get this from your Stripe Dashboard</p>
@@ -384,7 +384,7 @@ function ServiceForm({
               type="text"
               value={formData.stripe_product_id}
               onChange={(e) => setFormData({ ...formData, stripe_product_id: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="prod_xxxxxxxxxxxxx"
             />
             <p className="mt-1 text-xs text-gray-500">For reference only</p>
@@ -397,7 +397,7 @@ function ServiceForm({
             id="is_active"
             checked={formData.is_active}
             onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-            className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
           />
           <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
             Service is active and available for booking
@@ -407,7 +407,7 @@ function ServiceForm({
         <div className="flex gap-4">
           <button
             type="submit"
-            className="flex-1 bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+            className="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
           >
             Save Service
           </button>

@@ -54,7 +54,7 @@ export default function CartDrawer({ isOpen, onClose, onCheckout }: CartDrawerPr
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900">{item.name}</h3>
                     <p className="text-sm text-gray-600 capitalize">{item.type}</p>
-                    <p className="text-lg font-bold text-orange-600 mt-1">
+                    <p className="text-lg font-bold text-green-600 mt-1">
                       ${item.price.toFixed(2)}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
@@ -89,13 +89,13 @@ export default function CartDrawer({ isOpen, onClose, onCheckout }: CartDrawerPr
           <div className="border-t border-gray-200 p-6 bg-gray-50">
             <div className="flex items-center justify-between mb-4">
               <span className="text-lg font-semibold text-gray-900">Total</span>
-              <span className="text-2xl font-bold text-orange-600">
+              <span className="text-2xl font-bold text-green-600">
                 ${total.toFixed(2)}
               </span>
             </div>
             <button
               onClick={onCheckout}
-              className="w-full bg-orange-600 text-white py-4 rounded-lg font-semibold hover:bg-orange-700 transition text-lg"
+              className="w-full bg-green-600 text-white py-4 rounded-lg font-semibold hover:bg-green-700 transition text-lg"
             >
               Proceed to Checkout
             </button>

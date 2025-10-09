@@ -38,7 +38,7 @@ export default function MarriageEnrichment() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-block mb-4">
-              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-rose-600 via-pink-600 to-orange-600 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-rose-600 via-pink-600 to-green-600 bg-clip-text text-transparent">
                 Marriage Enrichment on Fire
               </h2>
             </div>

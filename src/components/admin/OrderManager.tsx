@@ -90,7 +90,7 @@ export default function OrderManager() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
@@ -144,7 +144,7 @@ export default function OrderManager() {
               </div>
               <div>
                 <label className="text-sm text-gray-600">Total Amount</label>
-                <p className="text-2xl font-bold text-orange-600">
+                <p className="text-2xl font-bold text-green-600">
                   ${Number(selectedOrder.total_amount).toFixed(2)}
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default function OrderManager() {
                 <select
                   value={selectedOrder.status}
                   onChange={(e) => updateOrderStatus(selectedOrder.id, e.target.value)}
-                  className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
                   <option value="pending">Pending</option>
                   <option value="paid">Paid</option>
@@ -228,7 +228,7 @@ export default function OrderManager() {
         </div>
         <button
           onClick={loadOrders}
-          className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+          className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
         >
           <RefreshCw className="w-5 h-5" />
           Refresh
@@ -302,7 +302,7 @@ export default function OrderManager() {
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <button
                       onClick={() => handleViewOrder(order)}
-                      className="text-orange-600 hover:text-orange-900 flex items-center gap-1 ml-auto"
+                      className="text-green-600 hover:text-green-900 flex items-center gap-1 ml-auto"
                     >
                       <Eye className="w-4 h-4" />
                       View

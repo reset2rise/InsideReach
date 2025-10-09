@@ -13,12 +13,6 @@ export default function WinnersCircle() {
       title: "Men's Accountability Group",
       description: 'Building brotherhood and strengthening character together',
       image: 'https://images.pexels.com/photos/4009590/pexels-photo-4009590.jpeg?auto=compress&cs=tinysrgb&w=800'
-    },
-    {
-      icon: Users,
-      title: "Pastor's Corner",
-      description: 'Wisdom and support for spiritual leaders',
-      image: 'https://images.pexels.com/photos/5206960/pexels-photo-5206960.jpeg?auto=compress&cs=tinysrgb&w=800'
     }
   ];
 
@@ -40,7 +34,7 @@ export default function WinnersCircle() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
             {programs.map((program, index) => {
               const Icon = program.icon;
               return (

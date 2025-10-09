@@ -64,14 +64,14 @@ export default function ShopPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">Shop</h1>
@@ -83,7 +83,7 @@ export default function ShopPage() {
             onClick={() => setActiveTab('products')}
             className={`px-8 py-3 rounded-lg font-semibold transition ${
               activeTab === 'products'
-                ? 'bg-orange-600 text-white'
+                ? 'bg-green-600 text-white'
                 : 'bg-white text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -93,7 +93,7 @@ export default function ShopPage() {
             onClick={() => setActiveTab('services')}
             className={`px-8 py-3 rounded-lg font-semibold transition ${
               activeTab === 'services'
-                ? 'bg-orange-600 text-white'
+                ? 'bg-green-600 text-white'
                 : 'bg-white text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -124,7 +124,7 @@ export default function ShopPage() {
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h3>
                     <p className="text-gray-600 mb-4 line-clamp-3">{product.description}</p>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-3xl font-bold text-orange-600">
+                      <span className="text-3xl font-bold text-green-600">
                         ${Number(product.price).toFixed(2)}
                       </span>
                       {product.inventory_count > 0 && (
@@ -136,7 +136,7 @@ export default function ShopPage() {
                     <button
                       onClick={() => handleAddToCart(product, 'product')}
                       disabled={product.inventory_count === 0}
-                      className="w-full flex items-center justify-center gap-2 bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Plus className="w-5 h-5" />
                       {product.inventory_count === 0 ? 'Out of Stock' : 'Add to Cart'}
@@ -169,7 +169,7 @@ export default function ShopPage() {
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.name}</h3>
                     <p className="text-gray-600 mb-4 line-clamp-3">{service.description}</p>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-3xl font-bold text-orange-600">
+                      <span className="text-3xl font-bold text-green-600">
                         ${Number(service.price).toFixed(2)}
                       </span>
                       {service.duration && (
@@ -178,7 +178,7 @@ export default function ShopPage() {
                     </div>
                     <button
                       onClick={() => handleAddToCart(service, 'service')}
-                      className="w-full flex items-center justify-center gap-2 bg-orange-600 text-white py-3 rounded-lg font-semibold hover:bg-orange-700 transition"
+                      className="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
                     >
                       <Plus className="w-5 h-5" />
                       Add to Cart

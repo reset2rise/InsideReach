@@ -96,31 +96,31 @@ function Navigation({
         <div className="flex items-center justify-between h-16">
           <button
             onClick={() => onNavigate('home')}
-            className="text-xl font-bold text-gray-900 hover:text-orange-600 transition"
+            className="text-xl font-bold text-gray-900 hover:text-green-600 transition"
           >
             Inside Reach Ministries
           </button>
           <div className="flex items-center gap-4">
             <button
               onClick={() => onNavigate('shop')}
-              className="text-gray-700 hover:text-orange-600 font-medium transition"
+              className="text-gray-700 hover:text-green-600 font-medium transition"
             >
               Shop
             </button>
             <button
               onClick={onCartClick}
-              className="relative p-2 text-gray-700 hover:text-orange-600 transition"
+              className="relative p-2 text-gray-700 hover:text-green-600 transition"
             >
               <ShoppingCart className="w-6 h-6" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                <span className="absolute -top-1 -right-1 bg-green-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                   {cartCount}
                 </span>
               )}
             </button>
             <button
               onClick={() => onNavigate('admin')}
-              className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
             >
               <LogIn className="w-4 h-4" />
               Admin
