@@ -81,13 +81,17 @@ export const stripeProducts: StripeProduct[] = [
   }
 ];
 
-export function getProductByPriceId(priceId: string): StripeProduct | undefined {
+export const getProductByPriceId = (priceId: string): StripeProduct | undefined => {
   return stripeProducts.find(product => product.priceId === priceId);
-}
+};
 
-export function formatPrice(price: number, currency: string = 'usd'): string {
+export const getProductById = (id: string): StripeProduct | undefined => {
+  return stripeProducts.find(product => product.id === id);
+};
+
+export const formatPrice = (price: number, currency: string = 'usd'): string => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currency.toUpperCase(),
   }).format(price);
-}
+};
