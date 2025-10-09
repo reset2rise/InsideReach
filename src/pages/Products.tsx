@@ -1,68 +1,36 @@
 import React from 'react';
 import { ProductCard } from '../components/ProductCard';
-import { stripeProducts } from '../stripe-config';
-import { supabase } from '../lib/supabase';
+import { STRIPE_PRODUCTS } from '../stripe-config';
+import { ShoppingBag, Sparkles } from 'lucide-react';
 
 export const Products: React.FC = () => {
-  const handlePurchase = async (priceId: string) => {
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          priceId,
-          userId: session?.user?.id,
-          userEmail: session?.user?.email,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to create checkout session');
-      }
-
-      const { url } = await response.json();
-      window.location.href = url;
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-      alert('Failed to start checkout process. Please try again.');
-    }
-  };
-
-  // Separate products by type
-  const subscriptionProducts = stripeProducts.filter(p => p.mode === 'subscription');
-  const oneTimeProducts = stripeProducts.filter(p => p.mode === 'payment');
+  const subscriptionProducts = STRIPE_PRODUCTS.filter(p => p.mode === 'subscription');
+  const oneTimeProducts = STRIPE_PRODUCTS.filter(p => p.mode === 'payment');
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Transform Your Life with Inside Reach
-          </h1>
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center space-x-3 mb-4">
+            <ShoppingBag className="w-8 h-8 text-indigo-600" />
+            <h1 className="text-4xl font-bold text-gray-900">Our Products & Services</h1>
+          </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our comprehensive programs and resources designed to help you unlock your potential 
-            and create lasting change in your relationships and personal growth.
+            Transform your life with our comprehensive coaching programs, resources, and experiences designed to help you reach your full potential.
           </p>
         </div>
 
         {/* Subscription Products */}
         {subscriptionProducts.length > 0 && (
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Ongoing Programs & Coaching
-            </h2>
+            <div className="flex items-center space-x-3 mb-8">
+              <Sparkles className="w-6 h-6 text-yellow-500" />
+              <h2 className="text-2xl font-bold text-gray-900">Ongoing Programs</h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {subscriptionProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onPurchase={handlePurchase}
-                />
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>
@@ -71,16 +39,13 @@ export const Products: React.FC = () => {
         {/* One-time Products */}
         {oneTimeProducts.length > 0 && (
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Books, Classes & Services
-            </h2>
+            <div className="flex items-center space-x-3 mb-8">
+              <ShoppingBag className="w-6 h-6 text-indigo-600" />
+              <h2 className="text-2xl font-bold text-gray-900">One-Time Purchases</h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {oneTimeProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onPurchase={handlePurchase}
-                />
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>

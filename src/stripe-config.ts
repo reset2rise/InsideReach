@@ -8,7 +8,7 @@ export interface StripeProduct {
   mode: 'payment' | 'subscription';
 }
 
-export const stripeProducts: StripeProduct[] = [
+export const STRIPE_PRODUCTS: StripeProduct[] = [
   {
     id: 'prod_T7ht6LpVIvKjeZ',
     priceId: 'price_1SBSTsB72uePbUtowGtFP0HJ',
@@ -74,7 +74,7 @@ export const stripeProducts: StripeProduct[] = [
     id: 'prod_RuiQXUWaOWGsHq',
     priceId: 'price_1R0szrB72uePbUtotZvORzbf',
     name: 'Play Date-Game Day/Night',
-    description: "Couples igniting the fire! You're joining an opportunity for next level intimacy and relationship, great connections, tasty treats, major fun, and as always giveaways...",
+    description: 'Couples igniting the fire! You\'re joining an opportunity for next level intimacy and relationship, great connections, tasty treats, major fun, and as always giveaways...',
     price: 40.00,
     currency: 'usd',
     mode: 'payment'
@@ -82,11 +82,11 @@ export const stripeProducts: StripeProduct[] = [
 ];
 
 export const getProductByPriceId = (priceId: string): StripeProduct | undefined => {
-  return stripeProducts.find(product => product.priceId === priceId);
+  return STRIPE_PRODUCTS.find(product => product.priceId === priceId);
 };
 
 export const getProductById = (id: string): StripeProduct | undefined => {
-  return stripeProducts.find(product => product.id === id);
+  return STRIPE_PRODUCTS.find(product => product.id === id);
 };
 
 export const formatPrice = (price: number, currency: string = 'usd'): string => {

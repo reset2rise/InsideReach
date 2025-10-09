@@ -16,6 +16,9 @@ import CartDrawer from './components/shop/CartDrawer';
 import { ShoppingCart, LogIn } from 'lucide-react';
 import { useCart } from './contexts/CartContext';
 
+import { Products } from './pages/Products';
+import { Dashboard } from './pages/Dashboard';
+import { Success } from './pages/Success';
 type Page = 'home' | 'shop' | 'checkout' | 'admin';
 
 function App() {
@@ -123,6 +126,9 @@ function Navigation({
               className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
             >
               <LogIn className="w-4 h-4" />
+              <Route path="/products" element={<Products />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/success" element={<Success />} />
               Admin
             </button>
           </div>

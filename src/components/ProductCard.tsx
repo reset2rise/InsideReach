@@ -1,23 +1,50 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Clock, CreditCard } from 'lucide-react';
+import { loadStripe } from '@stripe/stripe-js';
+import { supabase } from '../lib/supabase';
 import { StripeProduct, formatPrice } from '../stripe-config';
+import { ShoppingCart, Loader2, Crown, Calendar } from 'lucide-react';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 interface ProductCardProps {
   product: StripeProduct;
-  onPurchase: (priceId: string) => Promise<void>;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onPurchase }) => {
-  const [isLoading, setIsLoading] = useState(false);
+export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const [loading, setLoading] = useState(false);
 
-  const handlePurchase = async () => {
-    setIsLoading(true);
+  const handleCheckout = async () => {
     try {
-      await onPurchase(product.priceId);
+      setLoading(true);
+      const stripe = await stripePromise;
+      
+      if (!stripe) {
+        throw new Error('Stripe failed to load');
+      }
+
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: {
+          priceId: product.priceId,
+          mode: product.mode,
+          successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancelUrl: `${window.location.origin}/products`,
+        },
+      });
+
+      if (error) throw error;
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: data.sessionId,
+      });
+
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
     } catch (error) {
-      console.error('Purchase failed:', error);
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again.');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -25,43 +52,50 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onPurchase })
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-bold text-gray-900 leading-tight">{product.name}</h3>
-          <div className="flex items-center space-x-2">
-            {product.mode === 'subscription' ? (
-              <Clock className="w-5 h-5 text-blue-600" />
-            ) : (
-              <CreditCard className="w-5 h-5 text-green-600" />
-            )}
-          </div>
+          <h3 className="text-xl font-bold text-gray-900 leading-tight">
+            {product.name}
+          </h3>
+          {product.mode === 'subscription' && (
+            <Crown className="w-5 h-5 text-yellow-500 flex-shrink-0 ml-2" />
+          )}
         </div>
         
         {product.description && (
-          <p className="text-gray-600 mb-4 text-sm leading-relaxed">{product.description}</p>
+          <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+            {product.description}
+          </p>
         )}
         
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-2xl font-bold text-gray-900">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-2">
+            <span className="text-3xl font-bold text-indigo-600">
               {formatPrice(product.price, product.currency)}
             </span>
             {product.mode === 'subscription' && (
-              <span className="text-sm text-gray-500">per month</span>
+              <div className="flex items-center text-sm text-gray-500">
+                <Calendar className="w-4 h-4 mr-1" />
+                <span>/month</span>
+              </div>
             )}
           </div>
-          
-          <button
-            onClick={handlePurchase}
-            disabled={isLoading}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center space-x-2"
-          >
-            {isLoading ? (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <ShoppingCart className="w-5 h-5" />
-            )}
-            <span>{isLoading ? 'Processing...' : product.mode === 'subscription' ? 'Subscribe' : 'Buy Now'}</span>
-          </button>
         </div>
+        
+        <button
+          onClick={handleCheckout}
+          disabled={loading}
+          className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+        >
+          {loading ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <>
+              <ShoppingCart className="w-5 h-5" />
+              <span>
+                {product.mode === 'subscription' ? 'Subscribe Now' : 'Buy Now'}
+              </span>
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
