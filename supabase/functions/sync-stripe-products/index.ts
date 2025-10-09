@@ -48,17 +48,7 @@ Deno.serve(async (req: Request) => {
 
       const priceAmount = defaultPrice.unit_amount ? (defaultPrice.unit_amount / 100).toFixed(2) : '0.00';
       
-      const item = {
-        name: product.name,
-        description: product.description || '',
-        price: priceAmount,
-        stripe_product_id: product.id,
-        stripe_price_id: defaultPrice.id,
-        image_url: product.images && product.images.length > 0 ? product.images[0] : null,
-        active: product.active,
-      };
-
-      const isService = product.metadata?.type === 'service' || 
+      const isService = product.metadata?.type === 'service' ||
                        product.name.toLowerCase().includes('counseling') ||
                        product.name.toLowerCase().includes('coaching') ||
                        product.name.toLowerCase().includes('workshop') ||
@@ -68,9 +58,28 @@ Deno.serve(async (req: Request) => {
                        product.name.toLowerCase().includes('program');
 
       if (isService) {
-        servicesToInsert.push(item);
+        servicesToInsert.push({
+          name: product.name,
+          description: product.description || '',
+          price: priceAmount,
+          duration: '60 minutes',
+          stripe_product_id: product.id,
+          stripe_price_id: defaultPrice.id,
+          image_url: product.images && product.images.length > 0 ? product.images[0] : null,
+          is_active: product.active,
+        });
       } else {
-        productsToInsert.push(item);
+        productsToInsert.push({
+          name: product.name,
+          description: product.description || '',
+          price: priceAmount,
+          category: 'General',
+          inventory_count: 100,
+          stripe_product_id: product.id,
+          stripe_price_id: defaultPrice.id,
+          image_url: product.images && product.images.length > 0 ? product.images[0] : null,
+          is_active: product.active,
+        });
       }
     }
 
