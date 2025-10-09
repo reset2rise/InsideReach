@@ -7,9 +7,9 @@ export default function Hero() {
         <div className="max-w-5xl mx-auto text-center">
           <div className="flex justify-center mb-2">
             <img
-              src="/Inside Reach Ministries logo.png"
+              src="/11081908018686372599.png"
               alt="Inside Reach Ministries Logo"
-              className="w-full max-w-md h-auto mix-blend-multiply"
+              className="w-full max-w-md h-auto"
               style={{imageRendering: '-webkit-optimize-contrast', WebkitFontSmoothing: 'antialiased'}}
             />
           </div>
