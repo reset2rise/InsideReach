@@ -1,6 +1,5 @@
 import { ReactNode, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Link } from 'react-router-dom';
 import {
   LayoutDashboard,
   FileText,
@@ -17,9 +16,10 @@ interface AdminLayoutProps {
   children: ReactNode;
   activeTab: string;
   onTabChange: (tab: string) => void;
+  onBackToWebsite?: () => void;
 }
 
-export default function AdminLayout({ children, activeTab, onTabChange }: AdminLayoutProps) {
+export default function AdminLayout({ children, activeTab, onTabChange, onBackToWebsite }: AdminLayoutProps) {
   const { signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -95,13 +95,15 @@ export default function AdminLayout({ children, activeTab, onTabChange }: AdminL
         </nav>
 
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 space-y-2">
-          <Link
-            to="/"
-            className="w-full flex items-center gap-3 px-4 py-3 text-blue-600 hover:bg-blue-50 rounded-lg transition"
-          >
-            <Home className="w-5 h-5" />
-            <span className="font-medium">Back to Website</span>
-          </Link>
+          {onBackToWebsite && (
+            <button
+              onClick={onBackToWebsite}
+              className="w-full flex items-center gap-3 px-4 py-3 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+            >
+              <Home className="w-5 h-5" />
+              <span className="font-medium">Back to Website</span>
+            </button>
+          )}
           <button
             onClick={handleSignOut}
             className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition"

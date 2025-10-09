@@ -9,7 +9,11 @@ import ServiceManager from './ServiceManager';
 import OrderManager from './OrderManager';
 import DashboardOverview from './DashboardOverview';
 
-export default function AdminDashboard() {
+interface AdminDashboardProps {
+  onBackToWebsite?: () => void;
+}
+
+export default function AdminDashboard({ onBackToWebsite }: AdminDashboardProps) {
   const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
 
@@ -29,7 +33,11 @@ export default function AdminDashboard() {
   }
 
   return (
-    <AdminLayout activeTab={activeTab} onTabChange={setActiveTab}>
+    <AdminLayout
+      activeTab={activeTab}
+      onTabChange={setActiveTab}
+      onBackToWebsite={onBackToWebsite}
+    >
       {activeTab === 'dashboard' && <DashboardOverview />}
       {activeTab === 'content' && <ContentManager />}
       {activeTab === 'pages' && <PageManager />}

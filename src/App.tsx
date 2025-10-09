@@ -24,7 +24,7 @@ function App() {
   const { itemCount } = useCart();
 
   if (currentPage === 'admin') {
-    return <AdminDashboard />;
+    return <AdminDashboard onBackToWebsite={() => setCurrentPage('home')} />;
   }
 
   if (currentPage === 'checkout') {
