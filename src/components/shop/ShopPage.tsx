@@ -11,6 +11,7 @@ interface Product {
   image_url: string;
   category: string;
   inventory_count: number;
+  stripe_price_id?: string;
 }
 
 interface Service {
@@ -20,6 +21,7 @@ interface Service {
   price: number;
   duration: string;
   image_url: string;
+  stripe_price_id?: string;
 }
 
 export default function ShopPage() {
@@ -56,6 +58,7 @@ export default function ShopPage() {
       price: Number(item.price),
       type,
       image_url: item.image_url,
+      stripe_price_id: item.stripe_price_id,
     });
   };
 

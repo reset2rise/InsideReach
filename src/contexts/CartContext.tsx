@@ -7,6 +7,7 @@ interface CartItem {
   quantity: number;
   type: 'product' | 'service';
   image_url?: string;
+  stripe_price_id?: string;
 }
 
 interface CartContextType {

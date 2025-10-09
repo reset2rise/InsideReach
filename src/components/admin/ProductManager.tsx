@@ -11,6 +11,8 @@ interface Product {
   category: string;
   is_active: boolean;
   inventory_count: number;
+  stripe_price_id?: string;
+  stripe_product_id?: string;
   created_at: string;
 }
 
@@ -216,6 +218,8 @@ function ProductForm({
     category: product?.category || 'general',
     is_active: product?.is_active ?? true,
     inventory_count: product?.inventory_count || 0,
+    stripe_price_id: product?.stripe_price_id || '',
+    stripe_product_id: product?.stripe_product_id || '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -319,6 +323,36 @@ function ProductForm({
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
             placeholder="https://example.com/image.jpg"
           />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Stripe Price ID
+            </label>
+            <input
+              type="text"
+              value={formData.stripe_price_id}
+              onChange={(e) => setFormData({ ...formData, stripe_price_id: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              placeholder="price_xxxxxxxxxxxxx"
+            />
+            <p className="mt-1 text-xs text-gray-500">Get this from your Stripe Dashboard</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Stripe Product ID (Optional)
+            </label>
+            <input
+              type="text"
+              value={formData.stripe_product_id}
+              onChange={(e) => setFormData({ ...formData, stripe_product_id: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              placeholder="prod_xxxxxxxxxxxxx"
+            />
+            <p className="mt-1 text-xs text-gray-500">For reference only</p>
+          </div>
         </div>
 
         <div className="flex items-center">

@@ -24,6 +24,20 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
     setError('');
 
     try {
+      const itemsWithoutStripeId = items.filter(item => !item.stripe_price_id);
+
+      if (itemsWithoutStripeId.length > 0) {
+        setError('Some items do not have Stripe pricing configured. Please contact support.');
+        setLoading(false);
+        return;
+      }
+
+      if (items.length === 0) {
+        setError('Your cart is empty');
+        setLoading(false);
+        return;
+      }
+
       const orderNumber = `IRM-${Date.now()}`;
 
       const { data: orderData, error: orderError } = await supabase
@@ -58,40 +72,36 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
       if (itemsError) throw itemsError;
 
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const stripePublishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
-      const response = await fetch(
-        `${supabaseUrl}/functions/v1/create-payment-intent`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${supabaseAnonKey}`,
-          },
-          body: JSON.stringify({
-            amount: total,
-            metadata: {
-              order_id: orderData.id,
-              order_number: orderNumber,
-            },
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to create payment intent');
+      if (!stripePublishableKey) {
+        throw new Error('Stripe is not configured');
       }
 
-      const { clientSecret, paymentIntentId } = await response.json();
+      const stripe = await loadStripe(stripePublishableKey);
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
 
-      await supabase
-        .from('orders')
-        .update({ stripe_payment_id: paymentIntentId })
-        .eq('id', orderData.id);
+      const lineItems = items.map(item => ({
+        price: item.stripe_price_id,
+        quantity: item.quantity,
+      }));
 
-      alert('Order created successfully! Order number: ' + orderNumber);
+      const { error: stripeError } = await stripe.redirectToCheckout({
+        lineItems,
+        mode: 'payment',
+        successUrl: `${window.location.origin}/success?order=${orderNumber}`,
+        cancelUrl: `${window.location.origin}/shop`,
+        customerEmail: formData.email,
+        clientReferenceId: orderData.id,
+      });
+
+      if (stripeError) {
+        throw new Error(stripeError.message);
+      }
+
       clearCart();
-      onBack();
     } catch (err: any) {
       console.error('Checkout error:', err);
       setError(err.message || 'Failed to process order');
