@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, X, Heart, ShoppingBag, User } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { AuthModal } from './AuthModal';
+import { SubscriptionStatus } from './SubscriptionStatus';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -107,6 +108,14 @@ export const Navbar = () => {
           </div>
         )}
       </nav>
+      
+      {user && (
+        <div className="bg-gray-50 border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <SubscriptionStatus />
+          </div>
+        </div>
+      )}
 
       <AuthModal 
         isOpen={showAuthModal} 
